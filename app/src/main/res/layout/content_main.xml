@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.devin.flamingo.MainActivity"
+        tools:showIn="@layout/activity_main"
+        android:background="@drawable/dnnhintsback">
+
+    <!--<VideoView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:src="@drawable/insideimage"-->
+        <!--android:id="@+id/videoView"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginBottom="170dp"-->
+        <!--android:layout_marginTop="180dp"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:paddingRight="10dp"-->
+        <!--/>-->
+
+    <com.google.android.youtube.player.YouTubePlayerView
+        android:id="@+id/youtube_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="158dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginLeft="4dp"/>
+
+    <TextView
+        android:id="@+id/text_view_id"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="This is an Airplane!"
+        android:textSize="20sp"
+        android:background="#2D9DC8"
+        android:layout_above="@+id/button_upload"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/title_view_id"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="DNN Game Hints:"
+        android:textSize="25sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="18dp"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView"
+        />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Classify Image"
+        android:id="@+id/button_upload"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"
+        android:src="@drawable/help_button"
+        android:background="@android:color/transparent"
+        android:paddingBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="12dp" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/inside_logo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="60dp"
+        android:id="@+id/imageView" />
+
+</RelativeLayout>
