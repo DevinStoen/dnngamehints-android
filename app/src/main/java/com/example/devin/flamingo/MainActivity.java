@@ -54,8 +54,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import org.tensorflow.contrib.android.TensorFlowInferenceInterface;
 
 public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
 
@@ -72,6 +76,11 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer.OnInitializedListener onInitializedListener;
     YouTubePlayer mPlayer;
+
+
+    private List<Classifier> mClassifiers = new ArrayList<>();
+    private static final int PIXEL_WIDTH = 200;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +111,15 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         displayResult = (TextView) findViewById(R.id.text_view_id);
         displayResult.setText("");
         AsyncResponse delegate = null;
+
+
+        loadModel();
+        /** One time initialization: */
+        //TensorFlowInferenceInterface tensorflow = new TensorFlowInferenceInterface();
+        //tensorflow.initializeTensorFlow(getAssets(), "file:///android_asset/model.pb");
+
+
+
         //TextView titleView = (TextView)findViewById(R.id.title_view_id);
        // titleView.setTypeface(Typeface.createFromFile(getAssets(),"font/geforce_bold"));
 
@@ -162,6 +180,32 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);*/
 
+    }
+
+    //creates a model object in memory using the saved tensorflow protobuf model file
+    //which contains all the learned weights
+    private void loadModel() {
+        //The Runnable interface is another way in which you can implement multi-threading other than extending the
+        // //Thread class due to the fact that Java allows you to extend only one class. Runnable is just an interface,
+        // //which provides the method run.
+        // //Threads are implementations and use Runnable to call the method run().
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //add 2 classifiers to our classifier arraylist
+                    //the tensorflow classifier and the keras classifier
+                    mClassifiers.add(
+                            TensorFlowClassifier.create(getAssets(), "Tensorflow",
+                                    "output_graph.pb", "labels.txt", PIXEL_WIDTH,
+                                    "conv2d_1_input", "activation_5/Softmax", false));
+
+                } catch (final Exception e) {
+                    //if they aren't found, throw an error!
+                    throw new RuntimeException("Error initializing classifiers!", e);
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -286,6 +330,9 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         if (resultCode == RESULT_OK
                 && null != data) {
             imageUri = data.getData();
+
+
+
             // decodeUri(data.getData());
             uploadImage(imageUri);
         }
@@ -308,10 +355,32 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
 
         Bitmap rotBit = rotateImageIfRequired(this, bitmapImage, inImage);
         Bitmap resize = getResizedBitmap(rotBit, 200, 200);
-        Bitmap display = getResizedBitmap(rotBit, 720, 720);
+
         //imageView.setImageBitmap(display);
 
-        new UploadImage().execute(resize);
+
+        float pixels[] = getPixelData(resize);
+
+        //init an empty string to fill with the classification output
+        String text = "";
+        //for each classifier in our array
+        for (Classifier classifier : mClassifiers) {
+            //perform classification on the image
+            final Classification res = classifier.recognize(pixels);
+            //if it can't classify, output a question mark
+            if (res.getLabel() == null) {
+                text += classifier.name() + ": ?\n";
+            } else {
+                //else output its name
+                text += String.format("%s: %s, %f\n", classifier.name(), res.getLabel(),
+                        res.getConf());
+            }
+        }
+        displayResult.setText(text);
+
+
+
+        //new UploadImage().execute(resize);
         //displayResponseText(result);
         //send the image to flask server to classify
     }
@@ -368,7 +437,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
                 //"http://10.0.0.175:5000/"
                 //"https://dnngamehints.herokuapp.com/"
                 //https://copper-sol-174321.appspot.com
-                URL url = new URL("https://dnngamehints.herokuapp.com/");
+                URL url = new URL("https://copper-sol-174321.appspot.com");
                 HttpURLConnection c = (HttpURLConnection) url.openConnection();
                 c.setReadTimeout(30000);
                 // Timeout for connection.connect() arbitrarily set to 3000ms.
@@ -1236,6 +1305,50 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         }
 
     }
+
+
+    public float[] getPixelData(Bitmap mOffscreenBitmap) {
+        if (mOffscreenBitmap == null) {
+            return null;
+        }
+
+        int width = mOffscreenBitmap.getWidth();
+        int height = mOffscreenBitmap.getHeight();
+
+        // Get 28x28 pixel data from bitmap
+        int[] pixels = new int[width * height];
+        mOffscreenBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+
+        float[] retPixels = new float[pixels.length];
+        for (int i = 0; i < pixels.length; ++i) {
+            // Set 0 for white and 255 for black pixel
+            int pix = pixels[i];
+            int b = pix;
+            retPixels[i] = (float)(b);
+        }
+        return retPixels;
+
+
+//        int width = mOffscreenBitmap.getWidth();
+//        int height = mOffscreenBitmap.getHeight();
+//
+//        float[] floatValues = new float[width * height * 3];
+//        int[] intValues = new int[width * height];
+//
+//        mOffscreenBitmap.getPixels(intValues, 0, width, 0, 0, width, height);
+//
+//        for (int i = 0; i < intValues.length; ++i) {
+//            final int val = intValues[i];
+//            floatValues[i * 3 + 0] = (((val >> 16) & 0xFF) - imageMean) / imageStd;
+//            floatValues[i * 3 + 1] = (((val >> 8) & 0xFF) - imageMean) / imageStd;
+//            floatValues[i * 3 + 2] = ((val & 0xFF) - imageMean) / imageStd;
+//        }
+
+    }
+
+
+
+
 
 
 }
