@@ -75,7 +75,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
 
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer.OnInitializedListener onInitializedListener;
-    YouTubePlayer mPlayer;
+    private YouTubePlayer mPlayer;
 
 
     private List<Classifier> mClassifiers = new ArrayList<>();
@@ -94,7 +94,8 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 mPlayer = youTubePlayer;
-
+                //h1FU-T2EsVA
+                //F0XhOUM7AHs
                 mPlayer.loadVideo("F0XhOUM7AHs");
                 //mPlayer.play();
             }
@@ -196,7 +197,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
                     //add 2 classifiers to our classifier arraylist
                     //the tensorflow classifier and the keras classifier
                     mClassifiers.add(
-                            TensorFlowClassifier.create(getAssets(), "Tensorflow",
+                            TensorFlowClassifier.create(getAssets(), "Keras",
                                     "output_graph.pb", "labels.txt", PIXEL_WIDTH,
                                     "conv2d_1_input", "activation_5/Softmax", false));
 
@@ -363,20 +364,22 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
 
         //init an empty string to fill with the classification output
         String text = "";
+        displayResult.setText("");
         //for each classifier in our array
         for (Classifier classifier : mClassifiers) {
             //perform classification on the image
             final Classification res = classifier.recognize(pixels);
             //if it can't classify, output a question mark
             if (res.getLabel() == null) {
-                text += classifier.name() + ": ?\n";
+                text = classifier.name() + ": ?\n";
             } else {
                 //else output its name
-                text += String.format("%s: %s, %f\n", classifier.name(), res.getLabel(),
-                        res.getConf());
+                text = "[" + res.getLabel() + "]";
             }
         }
-        displayResult.setText(text);
+
+        displayResponseText(text);
+        //displayResult.setText(text);
 
 
 
@@ -551,15 +554,16 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             displayResult.setText("1Forest CP1.2");
             //mPlayer.seekToMillis(67000);
             mPlayer.loadVideo("h1FU-T2EsVA", 67000);
-
+            
             //mPlayer.play();
         }
         else if(result.equals("[2]")){
             displayResult.setText("1Forest CP2.1");
             //mPlayer.seekToMillis(101000);
+
             mPlayer.loadVideo("h1FU-T2EsVA",101000);
 
-            //mPlayer.play();
+
         }
         else if(result.equals("[3]")){
             displayResult.setText("1Forest CP2.2");
@@ -618,7 +622,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         }
         else if(result.equals("[13]")){
             displayResult.setText("2Farm CP1.3");
-            
+
             mPlayer.loadVideo("btS9rWtm_Ms", 78000);
             //mPlayer.play();
         }
@@ -1312,38 +1316,39 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             return null;
         }
 
-        int width = mOffscreenBitmap.getWidth();
-        int height = mOffscreenBitmap.getHeight();
-
-        // Get 28x28 pixel data from bitmap
-        int[] pixels = new int[width * height];
-        mOffscreenBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-
-        float[] retPixels = new float[pixels.length];
-        for (int i = 0; i < pixels.length; ++i) {
-            // Set 0 for white and 255 for black pixel
-            int pix = pixels[i];
-            int b = pix;
-            retPixels[i] = (float)(b);
-        }
-        return retPixels;
-
-
 //        int width = mOffscreenBitmap.getWidth();
 //        int height = mOffscreenBitmap.getHeight();
 //
-//        float[] floatValues = new float[width * height * 3];
-//        int[] intValues = new int[width * height];
+//        // Get 28x28 pixel data from bitmap
+//        int[] pixels = new int[width * height];
+//        mOffscreenBitmap.getPixels(pixels, 0, width, 0, 0, width, height);
 //
-//        mOffscreenBitmap.getPixels(intValues, 0, width, 0, 0, width, height);
-//
-//        for (int i = 0; i < intValues.length; ++i) {
-//            final int val = intValues[i];
-//            floatValues[i * 3 + 0] = (((val >> 16) & 0xFF) - imageMean) / imageStd;
-//            floatValues[i * 3 + 1] = (((val >> 8) & 0xFF) - imageMean) / imageStd;
-//            floatValues[i * 3 + 2] = ((val & 0xFF) - imageMean) / imageStd;
+//        float[] retPixels = new float[pixels.length];
+//        for (int i = 0; i < pixels.length; ++i) {
+//            // Set 0 for white and 255 for black pixel
+//            int pix = pixels[i];
+//            int b = pix;
+//            retPixels[i] = (float)(b);
 //        }
+//        return retPixels;
 
+
+        int width = mOffscreenBitmap.getWidth();
+        int height = mOffscreenBitmap.getHeight();
+
+        float[] floatValues = new float[width * height * 3];
+        int[] intValues = new int[width * height];
+
+        mOffscreenBitmap.getPixels(intValues, 0, width, 0, 0, width, height);
+
+        for (int i = 0; i < intValues.length; ++i) {
+            final int val = intValues[i];
+            floatValues[i * 3 + 0] = (((val >> 16) & 0xFF) - 110) / 1;
+            floatValues[i * 3 + 1] = (((val >> 8) & 0xFF) - 110) / 1;
+            floatValues[i * 3 + 2] = ((val & 0xFF) - 110) / 1;
+        }
+
+        return floatValues;
     }
 
 

@@ -76,7 +76,7 @@ public class TensorFlowClassifier implements Classifier {
 
         //set its model path and where the raw asset files are
         c.tfHelper = new TensorFlowInferenceInterface(assetManager, modelPath);
-        int numClasses = 10;
+        int numClasses = 2;
 
         //how big is the input?
         c.inputSize = inputSize;
@@ -103,7 +103,7 @@ public class TensorFlowClassifier implements Classifier {
         //using the interface
         //give it the input name, raw pixels from the drawing,
         //input size
-        tfHelper.feed(inputName, pixels, 1, inputSize, inputSize, 1);
+        tfHelper.feed(inputName, pixels, 1, inputSize, inputSize, 3);
 
         //probabilities
         if (feedKeepProb) {
