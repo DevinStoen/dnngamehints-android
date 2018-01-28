@@ -75,12 +75,14 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
 
     YouTubePlayerView youTubePlayerView;
     YouTubePlayer.OnInitializedListener onInitializedListener;
-    private YouTubePlayer mPlayer;
-
+    public YouTubePlayer mPlayer;
+    public String videoID = "F0XhOUM7AHs";
+    public int timeMiliseconds = 0;
 
     private List<Classifier> mClassifiers = new ArrayList<>();
     private static final int PIXEL_WIDTH = 200;
 
+    ArrayList<String> videos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,15 +90,22 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        videos.add("F0XhOUM7AHs");
+        videos.add("h1FU-T2EsVA");
 
         youTubePlayerView = (YouTubePlayerView) findViewById(R.id.youtube_player_view);
         onInitializedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+
+                System.out.println("player ready");
                 mPlayer = youTubePlayer;
+
                 //h1FU-T2EsVA
                 //F0XhOUM7AHs
-                mPlayer.loadVideo("F0XhOUM7AHs");
+                //mPlayer.loadVideos(videos);
+                //tutorial video
+                mPlayer.loadVideo(videoID, timeMiliseconds);
                 //mPlayer.play();
             }
 
@@ -543,127 +552,211 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
 
     public void displayResponseText(String result){
 
-        if(result.equals("[0]")){
-            displayResult.setText("1Forest CP1.1");
-            //mPlayer.seekToMillis(12000);
-            mPlayer.loadVideo("h1FU-T2EsVA",12000);
+        if(mPlayer!=null){
+            mPlayer.release();
+        }
 
+        if(result.equals("[0]")){
+
+            //mPlayer.seekToMillis(12000);
+            //mPlayer.loadVideo("h1FU-T2EsVA",12000);
+            displayResult.setText("1Forest CP1.1");
+            timeMiliseconds = 12000;
             //mPlayer.play();
+            videoID = "h1FU-T2EsVA";
+
         }
         else if (result.equals("[1]")){
-            displayResult.setText("1Forest CP1.2");
+
+
             //mPlayer.seekToMillis(67000);
-            mPlayer.loadVideo("h1FU-T2EsVA", 67000);
-            
+            //mPlayer.pause();
+            //mPlayer.loadVideo("h1FU-T2EsVA", 67000);
+            displayResult.setText("1Forest CP1.2");
+
+            timeMiliseconds = 67000;
+
+            videoID = "h1FU-T2EsVA";
+            //youTubePlayerView.initialize(PlayerConfig.API_KEY, onInitializedListener);
             //mPlayer.play();
         }
         else if(result.equals("[2]")){
             displayResult.setText("1Forest CP2.1");
             //mPlayer.seekToMillis(101000);
 
-            mPlayer.loadVideo("h1FU-T2EsVA",101000);
+            timeMiliseconds = 101000;
+            videoID = "h1FU-T2EsVA";
+            //mPlayer.loadVideo("h1FU-T2EsVA",101000);
 
 
         }
         else if(result.equals("[3]")){
             displayResult.setText("1Forest CP2.2");
             //mPlayer.seekToMillis(134000);
-            mPlayer.loadVideo("h1FU-T2EsVA",134000);
+
+            timeMiliseconds = 134000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",134000);
 
             //mPlayer.play();
         }
         else if (result.equals("[4]")){
             displayResult.setText("1Forest CP2.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 167000);
+            timeMiliseconds = 167000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 167000);
             //mPlayer.play();
         }
         else if(result.equals("[5]")){
             displayResult.setText("1Forest CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 202000);
+            timeMiliseconds = 202000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 202000);
             //mPlayer.play();
         }
         else if(result.equals("[6]")){
             displayResult.setText("1Forest CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 258000);
+
+            timeMiliseconds = 258000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 258000);
             //mPlayer.play();
         }
         else if (result.equals("[8]")){
             displayResult.setText("1Forest CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 311000);
+            timeMiliseconds = 311000;
+            videoID = "h1FU-T2EsVA";
+
+            
+            //mPlayer.loadVideo("h1FU-T2EsVA", 311000);
             //mPlayer.play();
         }
         else if(result.equals("[9]")){
             displayResult.setText("1Forest CP6.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 376000);
+            timeMiliseconds = 376000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 376000);
             //mPlayer.play();
         }
         else if(result.equals("[10]")){
             displayResult.setText("1Forest CP6.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 22000);
+            timeMiliseconds = 22000;
+            videoID = "btS9rWtm_Ms";
+
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 22000);
             //mPlayer.play();
         }
         else if (result.equals("[11]")){
             displayResult.setText("2Farm CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 452000);
+            timeMiliseconds = 452000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 452000);
             //mPlayer.play();
         }
         else if(result.equals("[12]")){
             displayResult.setText("2Farm CP1.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 1324000);
+            timeMiliseconds = 1324000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 1324000);
             //mPlayer.play();
         }
         else if(result.equals("[13]")){
             displayResult.setText("2Farm CP1.3");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 78000);
+            timeMiliseconds = 78000;
+            videoID = "btS9rWtm_Ms";
+
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 78000);
             //mPlayer.play();
         }
         else if (result.equals("[14]")){
             displayResult.setText("2Farm CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 521000);
+            timeMiliseconds = 521000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 521000);
             //mPlayer.play();
         }
         else if(result.equals("[15]")){
             displayResult.setText("2Farm CP2.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 537000);
+            timeMiliseconds = 537000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 537000);
             //mPlayer.play();
         }
         else if(result.equals("[16]")){
             displayResult.setText("2Farm CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 661000);
+            timeMiliseconds = 661000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 661000);
             //mPlayer.play();
         }
         else if (result.equals("[17]")){
             displayResult.setText("2Farm CP3.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 134000);
+            timeMiliseconds = 134000;
+            videoID = "btS9rWtm_Ms";
+
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 134000);
             //mPlayer.play();
         }
         else if(result.equals("[18]")){
             displayResult.setText("2Farm CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",691000);
+            timeMiliseconds = 691000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",691000);
             //mPlayer.play();
         }
         else if(result.equals("[19]")){
             displayResult.setText("2Farm CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",731000);
+            timeMiliseconds = 731000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",731000);
             //mPlayer.play();
         }
         else if (result.equals("[20]")){
             displayResult.setText("2Farm CP5.2");
+
+            timeMiliseconds = 753000;
+            videoID = "h1FU-T2EsVA";
 
             mPlayer.loadVideo("h1FU-T2EsVA", 753000);
             //mPlayer.play();
@@ -671,83 +764,136 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         else if(result.equals("[21]")){
             displayResult.setText("2Farm CP5.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 794000);
+            timeMiliseconds = 794000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 794000);
             //mPlayer.play();
         }
         else if(result.equals("[22]")){
             displayResult.setText("2Farm CP5.4");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 837000);
+            timeMiliseconds = 837000;
+            videoID = "h1FU-T2EsVA";
+
+
+           // mPlayer.loadVideo("h1FU-T2EsVA", 837000);
             //mPlayer.play();
         }
         else if (result.equals("[23]")){
             displayResult.setText("3City CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 870000);
+            timeMiliseconds = 870000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 870000);
             //mPlayer.play();
         }
         else if(result.equals("[24]")){
             displayResult.setText("3City CP1.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",938000);
+            timeMiliseconds = 938000;
+            videoID = "h1FU-T2EsVA";
+
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",938000);
             //mPlayer.play();
         }
         else if(result.equals("[25]")){
             displayResult.setText("3City CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 954000);
+            timeMiliseconds = 954000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 954000);
             //mPlayer.play();
         }
         else if (result.equals("[26]")){
             displayResult.setText("3City CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",1004000);
+            timeMiliseconds = 1004000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",1004000);
             //mPlayer.play();
         }
         else if(result.equals("[27]")){
             displayResult.setText("3City CP4.1");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 189000);
+            timeMiliseconds = 189000;
+            videoID = "btS9rWtm_Ms";
+
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 189000);
             //mPlayer.play();
         }
         else if(result.equals("[28]")){
             displayResult.setText("3City CP4.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",1039000);
+            timeMiliseconds = 1039000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",1039000);
             //mPlayer.play();
         }
         else if(result.equals("[29]")){
             displayResult.setText("3City CP4.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1095000);
+            timeMiliseconds = 1095000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1095000);
             //mPlayer.play();
         }
         else if(result.equals("[30]")){
             displayResult.setText("3City CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1124000);
+            timeMiliseconds = 1124000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1124000);
             //mPlayer.play();
         }
         else if(result.equals("[31]")){
             displayResult.setText("3City CP5.2 ");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 216000);
+            timeMiliseconds = 216000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 216000);
             //mPlayer.play();
         }
         else if(result.equals("[32]")){
             displayResult.setText("3City CP6.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",1185000);
+            timeMiliseconds = 1185000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",1185000);
             //mPlayer.play();
         }
         else if(result.equals("[33]")){
             displayResult.setText("3City CP6.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1208000);
+            timeMiliseconds = 1208000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1208000);
             //mPlayer.play();
         }
         else if(result.equals("[34]")){
             displayResult.setText("3City CP7.1");
+
+            timeMiliseconds = 1235000;
+            videoID = "h1FU-T2EsVA";
 
             mPlayer.loadVideo("h1FU-T2EsVA", 1235000);
             //mPlayer.play();
@@ -755,227 +901,350 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         else if(result.equals("[35]")){
             displayResult.setText("4Factory CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1320000);
+            timeMiliseconds = 1320000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1320000);
             //mPlayer.play();
         }
         else if(result.equals("[36]")){
             displayResult.setText("4Factory CP1.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1327000);
+            timeMiliseconds = 1327000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1327000);
             //mPlayer.play();
         }
         else if(result.equals("[37]")){
             displayResult.setText("4Factory CP1.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1452000);
+            timeMiliseconds = 1452000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1452000);
             //mPlayer.play();
         }
         else if(result.equals("[38]")){
             displayResult.setText("4Factory CP1.4");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1483000);
+            timeMiliseconds = 1483000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1483000);
             //mPlayer.play();
         }
         else if(result.equals("[39]")){
             displayResult.setText("4Factory CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1521000);
+            timeMiliseconds = 1521000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1521000);
             //mPlayer.play();
         }
         else if(result.equals("[40]")){
             displayResult.setText("4Factory CP2.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1534000);
+            timeMiliseconds = 1534000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1534000);
             //mPlayer.play();
         }
         else if(result.equals("[41]")){
             displayResult.setText("4Factory CP2.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1563000);
+            timeMiliseconds = 1563000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1563000);
             //mPlayer.play();
         }
         else if(result.equals("[42]")){
             displayResult.setText("4Factory CP2.4");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1621000);
+            timeMiliseconds = 1621000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1621000);
             //mPlayer.play();
         }
         else if(result.equals("[43]")){
             displayResult.setText("4Factory CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1636000);
+            timeMiliseconds = 1636000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1636000);
             //mPlayer.play();
         }
         else if(result.equals("[44]")){
             displayResult.setText("5Subway CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1713000);
+            timeMiliseconds = 1713000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1713000);
             //mPlayer.play();
         }
         else if(result.equals("[45]")){
             displayResult.setText("5Subway CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1816000);
+            timeMiliseconds = 1816000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1816000);
             //mPlayer.play();
         }
         else if(result.equals("[46]")){
             displayResult.setText("5Subway CP2.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1878000);
+            timeMiliseconds = 1878000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1878000);
             //mPlayer.play();
         }
         else if(result.equals("[47]")){
             displayResult.setText("5Subway CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 1914000);
+            timeMiliseconds = 1914000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 1914000);
             //mPlayer.play();
         }
         else if(result.equals("[48]")){
             displayResult.setText("5Subway CP3.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2005000);
+            timeMiliseconds = 2005000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2005000);
             //mPlayer.play();
         }
         else if(result.equals("[49]")){
             displayResult.setText("5Subway CP3.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",2042000);
+            timeMiliseconds = 2042000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",2042000);
             //mPlayer.play();
         }
         else if(result.equals("[50]")){
             displayResult.setText("6Depths CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2122000);
+            timeMiliseconds = 2122000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2122000);
             //mPlayer.play();
         }
         else if(result.equals("[51]")){
             displayResult.setText("6Depths CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2172000);
+            timeMiliseconds = 2172000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2172000);
             //mPlayer.play();
         }
         else if(result.equals("[52]")){
             displayResult.setText("6Depths CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2216000);
+            timeMiliseconds = 2216000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2216000);
             //mPlayer.play();
         }
         else if(result.equals("[53]")){
             displayResult.setText("6Depths CP3.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2239000);
+
+            timeMiliseconds = 2239000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2239000);
             //mPlayer.play();
         }
         else if(result.equals("[54]")){
             displayResult.setText("6Depths CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",2269000);
+
+            timeMiliseconds = 2269000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",2269000);
             //mPlayer.play();
         }
         else if(result.equals("[55]")){
             displayResult.setText("6Depths CP4.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2299000);
+            timeMiliseconds = 2299000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2299000);
             //mPlayer.play();
         }
         else if(result.equals("[56]")){
             displayResult.setText("6Depths CP4.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2341000);
+            timeMiliseconds = 2341000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2341000);
             //mPlayer.play();
         }
         else if(result.equals("[57]")){
             displayResult.setText("6Depths CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",2390000);
+            timeMiliseconds = 2390000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",2390000);
             //mPlayer.play();
         }
         else if(result.equals("[58]")){
             displayResult.setText("6Depths CP5.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2430000);
+            timeMiliseconds = 2430000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2430000);
             //mPlayer.play();
         }
         else if(result.equals("[59]")){
             displayResult.setText("6Depths CP5.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2443000);
+            timeMiliseconds = 2443000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2443000);
             //mPlayer.play();
         }
         else if(result.equals("[60]")){
             displayResult.setText("6Depths CP5.4");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2460000);
+            timeMiliseconds = 2460000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2460000);
             //mPlayer.play();
         }
         else if(result.equals("[61]")){
             displayResult.setText("6Depths CP6.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2496000);
+            timeMiliseconds = 2496000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2496000);
             //mPlayer.play();
         }
         else if(result.equals("[62]")){
             displayResult.setText("6Depths CP6.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 238000);
+            timeMiliseconds = 238000;
+            videoID = "btS9rWtm_Ms";
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 238000);
             //mPlayer.play();
         }
         else if(result.equals("[63]")){
             displayResult.setText("6Depths CP6.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2519000);
+            timeMiliseconds = 2519000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2519000);
             //mPlayer.play();
         }
         else if(result.equals("[64]")){
             displayResult.setText("6Depths CP7.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2614000);
+
+            timeMiliseconds = 2614000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2614000);
             //mPlayer.play();
         }
         else if(result.equals("[65]")){
             displayResult.setText("6Depths CP7.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2659000);
+            timeMiliseconds = 2659000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2659000);
             //mPlayer.play();
         }
         else if(result.equals("[66]")){
             displayResult.setText("6Depths CP7.3");
 
-            mPlayer.loadVideo("btS9rWtm_Ms",403000);
+            timeMiliseconds = 403000;
+            videoID = "btS9rWtm_Ms";
+
+            //mPlayer.loadVideo("btS9rWtm_Ms",403000);
             //mPlayer.play();
         }
         else if(result.equals("[67]")){
             displayResult.setText("7Mines CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2712000);
+            timeMiliseconds = 2712000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2712000);
             //mPlayer.play();
         }
         else if(result.equals("[68]")){
             displayResult.setText("7Mines CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 2852000);
+            timeMiliseconds = 2852000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 2852000);
             //mPlayer.play();
         }
         else if(result.equals("[69]")){
             displayResult.setText("7Mines CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",2981000);
+            timeMiliseconds = 2981000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",2981000);
             //mPlayer.play();
         }
         else if(result.equals("[70]")){
             displayResult.setText("7Mines CP3.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3030000);
+            timeMiliseconds = 3030000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3030000);
             //mPlayer.play();
         }
         else if(result.equals("[71]")){
             displayResult.setText("7Mines CP3.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3101000);
+            timeMiliseconds = 3101000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3101000);
             //mPlayer.play();
         }
         else if(result.equals("[72]")){
             displayResult.setText("7Mines CP3.4");
+
+            timeMiliseconds = 624000;
+            videoID = "btS9rWtm_Ms";
 
             mPlayer.loadVideo("btS9rWtm_Ms",624000);
             //mPlayer.play();
@@ -983,331 +1252,494 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
         else if(result.equals("[73]")){
             displayResult.setText("7Mines CP3.5");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3367000);
+            timeMiliseconds = 3367000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3367000);
             //mPlayer.play();
         }
         else if(result.equals("[74]")){
             displayResult.setText("7Mines CP3.6");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3380000);
+            timeMiliseconds = 3380000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3380000);
             //mPlayer.play();
         }
         else if(result.equals("[75]")){
             displayResult.setText("7Mines CP3.7");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3300000);
+            timeMiliseconds = 3300000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3300000);
             //mPlayer.play();
         }
         else if(result.equals("[76]")){
             displayResult.setText("7Mines CP3.8");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3244000);
+            timeMiliseconds = 3244000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3244000);
             //mPlayer.play();
         }
         else if(result.equals("[77]")){
             displayResult.setText("7Mines CP3.9");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3459000);
+            timeMiliseconds = 3459000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3459000);
             //mPlayer.play();
         }
         else if(result.equals("[78]")){
             displayResult.setText("8Bridge CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3482000);
+            timeMiliseconds = 3482000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3482000);
             //mPlayer.play();
         }
         else if(result.equals("[79]")){
             displayResult.setText("8Bridge CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3537000);
+            timeMiliseconds = 3537000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3537000);
             //mPlayer.play();
         }
         else if(result.equals("[80]")){
             displayResult.setText("8Bridge CP2.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3573000);
+            timeMiliseconds = 3573000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3573000);
             //mPlayer.play();
         }
         else if(result.equals("[81]")){
             displayResult.setText("8Bridge CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3601000);
+            timeMiliseconds = 3601000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3601000);
             //mPlayer.play();
         }
         else if(result.equals("[82]")){
             displayResult.setText("8Bridge CP3.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3612000);
+            timeMiliseconds = 3612000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3612000);
             //mPlayer.play();
         }
         else if(result.equals("[83]")){
             displayResult.setText("8Bridge CP3.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3645000);
+            timeMiliseconds = 3645000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3645000);
             //mPlayer.play();
         }
         else if(result.equals("[84]")){
             displayResult.setText("8Bridge CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3669000);
+            timeMiliseconds = 3669000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3669000);
             //mPlayer.play();
         }
         else if(result.equals("[85]")){
             displayResult.setText("8Bridge CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3739000);
+            timeMiliseconds = 3739000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3739000);
             //mPlayer.play();
         }
         else if(result.equals("[86]")){
             displayResult.setText("8Bridge CP5.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3793000);
+            timeMiliseconds = 3793000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3793000);
             //mPlayer.play();
         }
         else if(result.equals("[87]")){
             displayResult.setText("8Bridge CP6.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3822000);
+            timeMiliseconds = 3822000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3822000);
             //mPlayer.play();
         }
         else if(result.equals("[88]")){
             displayResult.setText("8Bridge CP7.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3859000);
+            timeMiliseconds = 3859000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3859000);
             //mPlayer.play();
         }
         else if(result.equals("[89]")){
             displayResult.setText("8Bridge CP7.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 3894000);
+            timeMiliseconds = 3894000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 3894000);
             //mPlayer.play();
         }
         else if(result.equals("[90]")){
             displayResult.setText("8Bridge CP7.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3915000);
+            timeMiliseconds = 3915000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3915000);
             //mPlayer.play();
         }
         else if(result.equals("[91]")){
             displayResult.setText("8Bridge CP8.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",3949000);
+            timeMiliseconds = 3949000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",3949000);
             //mPlayer.play();
         }
         else if(result.equals("[92]")){
             displayResult.setText("9FloodedBase CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",4022000);
+            timeMiliseconds = 4022000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",4022000);
             //mPlayer.play();
         }
         else if(result.equals("[93]")){
             displayResult.setText("9FloodedBase CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 4049000);
+            timeMiliseconds = 4049000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 4049000);
             //mPlayer.play();
         }
         else if(result.equals("[94]")){
             displayResult.setText("9FloodedBase CP2.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms",701000);
+            timeMiliseconds = 701000;
+            videoID = "btS9rWtm_Ms";
+
+            //mPlayer.loadVideo("btS9rWtm_Ms",701000);
             //mPlayer.play();
         }
         else if(result.equals("[95]")){
             displayResult.setText("9FloodedBase CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 4133000);
+            timeMiliseconds = 4133000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 4133000);
             //mPlayer.play();
         }
         else if(result.equals("[96]")){
             displayResult.setText("9FloodedBase CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",4252000);
+            timeMiliseconds = 4252000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",4252000);
             //mPlayer.play();
         }
         else if(result.equals("[97]")){
             displayResult.setText("10FacilitiesEntrance CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 4365000);
+            timeMiliseconds = 4365000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 4365000);
             //mPlayer.play();
         }
         else if(result.equals("[98]")){
             displayResult.setText("10FacilitiesEntrance CP1.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms", 761000);
+            timeMiliseconds = 761000;
+            videoID = "btS9rWtm_Ms";
+
+            //mPlayer.loadVideo("btS9rWtm_Ms", 761000);
             //mPlayer.play();
         }
         else if(result.equals("[99]")){
             displayResult.setText("10FacilitiesEntrance CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",4411000);
+            timeMiliseconds = 4411000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",4411000);
             //mPlayer.play();
         }
         else if(result.equals("[100]")){
             displayResult.setText("10FacilitiesEntrance CP2.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms",852000);
+            timeMiliseconds = 852000;
+            videoID = "btS9rWtm_Ms";
+
+           // mPlayer.loadVideo("btS9rWtm_Ms",852000);
             //mPlayer.play();
         }
         else if(result.equals("[101]")){
             displayResult.setText("10FacilitiesEntrance CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",4500000);
+            timeMiliseconds = 4500000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",4500000);
             //mPlayer.play();
         }
         else if(result.equals("[102]")){
             displayResult.setText("10FacilitiesEntrance CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 4524000);
+            timeMiliseconds = 4524000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 4524000);
             //mPlayer.play();
         }
         else if(result.equals("[103]")){
             displayResult.setText("10FacilitiesEntrance CP4.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 4685000);
+            timeMiliseconds = 4685000;
+            videoID = "h1FU-T2EsVA";
+
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 4685000);
             //mPlayer.play();
         }
         else if(result.equals("[104]")){
             displayResult.setText("10FacilitiesEntrance CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",4776000);
+            timeMiliseconds = 4776000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",4776000);
             //mPlayer.play();
         }
         else if(result.equals("[105]")){
             displayResult.setText("11ResearchFacility CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",4857000);
+            timeMiliseconds = 4857000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",4857000);
             //mPlayer.play();
         }
         else if(result.equals("[106]")){
             displayResult.setText("11ResearchFacility CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5038000);
+            timeMiliseconds = 5038000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5038000);
             //mPlayer.play();
         }
         else if(result.equals("[107]")){
             displayResult.setText("11ResearchFacility CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",5231000);
+            timeMiliseconds = 5231000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",5231000);
             //mPlayer.play();
         }
         else if(result.equals("[108]")){
             displayResult.setText("11ResearchFacility CP3.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms",1159000);
+            timeMiliseconds = 1159000;
+            videoID = "btS9rWtm_Ms";
+
+            //mPlayer.loadVideo("btS9rWtm_Ms",1159000);
             //mPlayer.play();
         }
         else if(result.equals("[109]")){
             displayResult.setText("11ResearchFacility CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5363000);
+            timeMiliseconds = 5363000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5363000);
             //mPlayer.play();
         }
         else if(result.equals("[110]")){
             displayResult.setText("11ResearchFacility CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",5399000);
+            timeMiliseconds = 5399000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",5399000);
             //mPlayer.play();
         }
         else if(result.equals("[111]")){
             displayResult.setText("11ResearchFacility CP6.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",5544000);
+            timeMiliseconds = 5544000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",5544000);
             //mPlayer.play();
         }
         else if(result.equals("[112]")){
             displayResult.setText("11ResearchFacility CP6.2");
 
-            mPlayer.loadVideo("btS9rWtm_Ms",1227000);
+            timeMiliseconds = 1227000;
+            videoID = "btS9rWtm_Ms";
+
+            //mPlayer.loadVideo("btS9rWtm_Ms",1227000);
             //mPlayer.play();
         }
         else if(result.equals("[113]")){
             displayResult.setText("11ResearchFacility CP7.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5631000);
+            timeMiliseconds = 5631000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5631000);
             //mPlayer.play();
         }
         else if(result.equals("[114]")){
             displayResult.setText("12Escape CP1.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5708000);
+            timeMiliseconds = 5708000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5708000);
             //mPlayer.play();
         }
         else if(result.equals("[115]")){
             displayResult.setText("12Escape CP1.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5824000);
+            timeMiliseconds = 5824000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5824000);
             //mPlayer.play();
         }
         else if(result.equals("[116]")){
             displayResult.setText("12Escape CP1.3");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",5843000);
+            timeMiliseconds = 5843000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",5843000);
             //mPlayer.play();
         }
         else if(result.equals("[117]")){
             displayResult.setText("12Escape CP2.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5876000);
+            timeMiliseconds = 5876000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5876000);
             //mPlayer.play();
         }
         else if(result.equals("[118]")){
             displayResult.setText("12Escape CP3.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 5992000);
+            timeMiliseconds = 5992000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 5992000);
             //mPlayer.play();
         }
         else if(result.equals("[119]")){
             displayResult.setText("12Escape CP3.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 6033000);
+            timeMiliseconds = 6033000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 6033000);
             //mPlayer.play();
         }
         else if(result.equals("[120]")){
             displayResult.setText("12Escape CP4.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",6088000);
+            timeMiliseconds = 6088000;
+            videoID = "h1FU-T2EsVA";
+
+           // mPlayer.loadVideo("h1FU-T2EsVA",6088000);
             //mPlayer.play();
         }
         else if(result.equals("[121]")){
             displayResult.setText("12Escape CP5.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",6149000);
+            timeMiliseconds = 6149000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",6149000);
             //mPlayer.play();
         }
         else if(result.equals("[122]")){
             displayResult.setText("12Escape CP6.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",6276000);
+            timeMiliseconds = 6276000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",6276000);
             //mPlayer.play();
         }
         else if(result.equals("[123]")){
             displayResult.setText("12Escape CP7.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA",6347000);
+            timeMiliseconds = 6347000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA",6347000);
             //mPlayer.play();
         }
         else if(result.equals("[124]")){
             displayResult.setText("12Escape CP8.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 6378000);
+            timeMiliseconds = 6378000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 6378000);
             //mPlayer.play();
         }
         else if(result.equals("[125]")){
             displayResult.setText("12Escape CP8.2");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 6392000);
+            timeMiliseconds = 6392000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 6392000);
             //mPlayer.play();
         }
         else if(result.equals("[126]")) {
             displayResult.setText("12Escape CP9.1");
 
-            mPlayer.loadVideo("h1FU-T2EsVA", 6532000);
+            timeMiliseconds = 6532000;
+            videoID = "h1FU-T2EsVA";
+
+            //mPlayer.loadVideo("h1FU-T2EsVA", 6532000);
             //mPlayer.play();
         }
         else{
             displayResult.setText("There has been an error...");
         }
-
+        youTubePlayerView.initialize(PlayerConfig.API_KEY, onInitializedListener);
     }
 
 
