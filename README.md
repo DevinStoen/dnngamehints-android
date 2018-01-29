@@ -9,7 +9,6 @@ This app uses a dnn to classify a given screenshot of the video game "INSIDE" an
 -XML
 -YouTube Android Player API
 
-## How It Works:
 
-Step 1.
+
 
