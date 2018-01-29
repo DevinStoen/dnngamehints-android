@@ -632,17 +632,17 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             //mPlayer.loadVideo("h1FU-T2EsVA", 258000);
             //mPlayer.play();
         }
-        else if (result.equals("[8]")){
+        else if (result.equals("[7]")){
             displayResult.setText("1Forest CP5.1");
 
             timeMiliseconds = 311000;
             videoID = "h1FU-T2EsVA";
 
-            
+
             //mPlayer.loadVideo("h1FU-T2EsVA", 311000);
             //mPlayer.play();
         }
-        else if(result.equals("[9]")){
+        else if(result.equals("[8]")){
             displayResult.setText("1Forest CP6.1");
 
             timeMiliseconds = 376000;
@@ -652,7 +652,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             //mPlayer.loadVideo("h1FU-T2EsVA", 376000);
             //mPlayer.play();
         }
-        else if(result.equals("[10]")){
+        else if(result.equals("[9]")){
             displayResult.setText("1Forest CP6.2");
 
             timeMiliseconds = 22000;
@@ -662,7 +662,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             //mPlayer.loadVideo("btS9rWtm_Ms", 22000);
             //mPlayer.play();
         }
-        else if (result.equals("[11]")){
+        else if (result.equals("[10]")){
             displayResult.setText("2Farm CP1.1");
 
             timeMiliseconds = 452000;
@@ -672,6 +672,9 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             //mPlayer.loadVideo("h1FU-T2EsVA", 452000);
             //mPlayer.play();
         }
+
+        //HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
         else if(result.equals("[12]")){
             displayResult.setText("2Farm CP1.2");
 
@@ -728,7 +731,7 @@ public class MainActivity extends YouTubeBaseActivity implements AsyncResponse {
             timeMiliseconds = 134000;
             videoID = "btS9rWtm_Ms";
 
-
+            
             //mPlayer.loadVideo("btS9rWtm_Ms", 134000);
             //mPlayer.play();
         }

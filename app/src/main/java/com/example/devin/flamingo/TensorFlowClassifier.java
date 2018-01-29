@@ -76,7 +76,7 @@ public class TensorFlowClassifier implements Classifier {
 
         //set its model path and where the raw asset files are
         c.tfHelper = new TensorFlowInferenceInterface(assetManager, modelPath);
-        int numClasses = 2;
+        int numClasses = 10;
 
         //how big is the input?
         c.inputSize = inputSize;
