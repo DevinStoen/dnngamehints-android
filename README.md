@@ -1,5 +1,5 @@
 # dnngamehints-android
-This app uses a dnn to classify a given screenshot of the video game "INSIDE" (by Playdead) and provides users with a video walk-through hint on how to proceed through the various puzzles. 
+This app uses deep learning to classify a given screenshot of the video game "INSIDE" (by Playdead) and provides users with a video walk-through hint on how to proceed through the various puzzles. 
 
 This project was inspired by the University of Washington/NVIDIA Winter-Spring 2017 EE 497-498 entrepenuerial capstone project.
 Demo URL: https://www.youtube.com/watch?v=jFVDtwrJ05Y&feature=youtu.be
@@ -16,6 +16,7 @@ Mentored by: Roger Allen (RAllen@nvidia.com) and Brian Nelson (nelson@ee.washing
 -Java
 -XML
 -YouTube Android Player API
+
 
 
 
